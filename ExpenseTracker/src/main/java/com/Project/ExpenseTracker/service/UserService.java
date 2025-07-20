@@ -27,7 +27,7 @@ public class UserService {
 
     public User login(String username,String Password){
         Optional<User> optionalUser=userRepository.findByUsername(username);
-            if(optionalUser.isPresent() && optionalUser.get().getPassword().equals(Password)){
+            if(optionalUser.isPresent() && passwordEncoder.matches(Password, optionalUser.get().getPassword())){
                 return optionalUser.get();
             }
             return null;

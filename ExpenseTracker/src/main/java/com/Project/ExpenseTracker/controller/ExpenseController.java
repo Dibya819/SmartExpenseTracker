@@ -1,10 +1,13 @@
 package com.Project.ExpenseTracker.controller;
 
+import com.Project.ExpenseTracker.DTO.ExpenseRequest;
 import com.Project.ExpenseTracker.model.Expense;
 import com.Project.ExpenseTracker.model.ExpenseFilterRequest;
 import com.Project.ExpenseTracker.model.User;
 import com.Project.ExpenseTracker.repository.UserRepository;
 import com.Project.ExpenseTracker.service.ExpenseService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -25,16 +28,12 @@ public class ExpenseController {
 
     private String getCurrentUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();  // username
+        return authentication.getName();
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addExpense(@RequestBody Expense expense) {
+    public ResponseEntity<String> addExpense(@Valid @RequestBody ExpenseRequest expense) {
         String username = getCurrentUsername();
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        expense.setUser(user);
         expenseService.addExpense(expense, username);
 
         return ResponseEntity.ok("Expense added successfully");
@@ -47,13 +46,13 @@ public class ExpenseController {
     }
 
     @PutMapping("/update/{id}")
-    public Expense updateExpense(@PathVariable Long id, @RequestBody Expense updatedExpense) {
+    public Expense updateExpense(@PathVariable Long id,@Valid @RequestBody ExpenseRequest updatedExpense) {
         String username = getCurrentUsername();
         return expenseService.updateExpense(id, updatedExpense, username);
     }
 
     @PostMapping("/filter")
-    public List<Expense> filterExpenses(@RequestBody ExpenseFilterRequest filterRequest) {
+    public List<Expense> filterExpenses(@Valid @RequestBody ExpenseFilterRequest filterRequest) {
         String username = getCurrentUsername();
         return expenseService.filterExpenses(filterRequest, username);
     }

@@ -1,15 +1,19 @@
 package com.Project.ExpenseTracker.model;
 
+import jakarta.validation.constraints.Positive;
+
 import java.time.LocalDate;
 
 public class ExpenseFilterRequest {
-private String username;
-private String category;
-private Double minAmount;
-private Double maxAmount;
-private LocalDate startDate;
-private LocalDate endDate;
-private String description;
+    private String username;
+    private String category;
+    @Positive(message = "Minimum amount must be a positive number")
+    private Double minAmount;
+    @Positive(message = "Maximum amount must be a positive number")
+    private Double maxAmount;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private String description;
 
     public String getUsername() {
         return username;

@@ -1,5 +1,6 @@
 package com.Project.ExpenseTracker.service;
 
+import com.Project.ExpenseTracker.DTO.ExpenseRequest;
 import com.Project.ExpenseTracker.model.Expense;
 import com.Project.ExpenseTracker.model.ExpenseFilterRequest;
 import com.Project.ExpenseTracker.model.User;
@@ -18,8 +19,13 @@ public class ExpenseService {
     private ExpenseRepository expenseRepository;
     @Autowired
     private UserRepository userRepository;
-    public void addExpense(Expense expense, String username){
+    public void addExpense(ExpenseRequest request, String username){
         User user=userRepository.findByUsername(username).orElseThrow(()->new RuntimeException("User not found with this username"+username));
+        Expense expense=new Expense();
+        expense.setCategory(request.getCategory());
+        expense.setDescription(request.getDescription());
+        expense.setAmount(request.getAmount());
+        expense.setDate(request.getDate());
         expense.setUser(user);
         expenseRepository.save(expense);
     }
@@ -27,7 +33,7 @@ public class ExpenseService {
         User user=userRepository.findByUsername(username).orElseThrow(()->new RuntimeException("User not found with this username"+username));
         return expenseRepository.findByUser(user);
     }
-   public Expense updateExpense(Long id, Expense updatedExpense, String username){
+   public Expense updateExpense(Long id, ExpenseRequest updatedExpense, String username){
         Expense existingExpense=expenseRepository.findById(id).orElseThrow(()->new RuntimeException("Expense not Found"));
         if(!existingExpense.getUser().getUsername().equals(username)){
             throw new RuntimeException("Unauthorized access");
