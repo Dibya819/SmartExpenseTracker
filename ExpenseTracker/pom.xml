@@ -99,6 +99,7 @@
     </dependencies>
 
     <build>
+        <finalName>ExpenseTracker</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
