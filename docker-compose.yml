@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   app:
     build: .
@@ -5,6 +7,10 @@ services:
       - "8080:8080"
     depends_on:
       - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/expenses
+      SPRING_DATASOURCE_USERNAME: expenseuser
+      SPRING_DATASOURCE_PASSWORD: expensepassword
 
   mysql:
     image: mysql:8.0.33
