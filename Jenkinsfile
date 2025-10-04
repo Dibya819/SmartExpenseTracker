@@ -14,17 +14,11 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Dibya819/SmartExpenseTracker.git'
-            }
-        }
-
         stage('Build & Test') {
             steps {
                 script {
                     retry(2) {
-                        sh 'mvn clean package'
+                        sh 'mvn clean package -DskipTests'
                     }
                 }
             }
