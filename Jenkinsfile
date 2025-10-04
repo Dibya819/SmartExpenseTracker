@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     retry(2) {
-                        sh 'mvn clean package -DskipTests'
+                        bat 'mvn clean package -DskipTests'
                     }
                 }
             }
@@ -26,14 +26,14 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t expense-tracker:latest .'
+                bat 'docker build -t expense-tracker:latest .'
             }
         }
 
         stage('Docker Compose Deploy') {
             steps {
-                sh 'docker-compose down'
-                sh 'docker-compose up -d'
+                bat 'docker-compose down'
+                bat 'docker-compose up -d'
             }
         }
     }

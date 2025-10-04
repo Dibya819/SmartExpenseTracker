@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    image: expense-tracker:latest
+    image: expense-tracker:latestgit
     ports:
       - "8080:8080"
     depends_on:
@@ -11,6 +11,7 @@ services:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+
 
   mysql:
     image: mysql:8.0.33
