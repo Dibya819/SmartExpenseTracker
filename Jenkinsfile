@@ -18,9 +18,10 @@ pipeline {
             steps {
                 script {
                     retry(2) {
-                        withMaven(maven: 'm3') {
-                                   bat 'mvn clean package -DskipTests'
-                               }
+                        // Go into ExpenseTracker folder where pom.xml exists
+                        dir('ExpenseTracker') {
+                            bat 'mvn clean package -DskipTests'
+                        }
                     }
                 }
             }
