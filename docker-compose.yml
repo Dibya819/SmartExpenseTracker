@@ -8,9 +8,9 @@ services:
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/expenses
-      SPRING_DATASOURCE_USERNAME: expenseuser
-      SPRING_DATASOURCE_PASSWORD: expensepassword
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
 
   mysql:
     image: mysql:8.0.33
