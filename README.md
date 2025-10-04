@@ -62,10 +62,10 @@ A full-stack Java backend project for tracking personal expenses with secure use
 - User authentication with JWT
 - Secure role-based access
 - Expense management with all CRUD
-
-> 🔜 Next:
 - Dockerize the project
 - Add Kubernetes deployment
+
+> 🔜 Next:
 - Integrate AWS (EC2, S3)
 - Add analytics with AI 📊
 
@@ -80,3 +80,4 @@ Java Backend Developer | DevOps Learner
 ---
 
 ## 🌟 Give it a star if you liked it!
+
