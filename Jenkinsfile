@@ -18,7 +18,9 @@ pipeline {
             steps {
                 script {
                     retry(2) {
-                        bat 'mvn clean package -DskipTests'
+                        withMaven(maven: 'M3') {
+                                   bat 'mvn clean package -DskipTests'
+                               }
                     }
                 }
             }
